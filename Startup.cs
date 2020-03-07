@@ -22,6 +22,8 @@ namespace WebAPI
             Configuration = configuration;
         }
 
+        private readonly string _CORSENABLE = "EnabledCors";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -29,9 +31,9 @@ namespace WebAPI
         {
             //Politica X-CROSS SITE CORS
             services.AddCors(options =>
-                options.AddPolicy("EnableCORS", builder =>
-                builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials().Build()));
-
+                options.AddPolicy(_CORSENABLE, builder =>
+            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build()));
+            
             //Servicio BD
             var connection = @"Data Source=localhost;Initial Catalog=webAPI;Integrated Security=True";
             services.AddDbContext<webAPIContext>(options => options.UseSqlServer(connection));
@@ -52,7 +54,7 @@ namespace WebAPI
                 app.UseHsts();
             }
 
-            app.UseCors("EnabledCORS");
+            app.UseCors(_CORSENABLE);
             app.UseFileServer();
 
             app.UseHttpsRedirection();
