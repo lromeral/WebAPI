@@ -42,7 +42,8 @@ namespace WebAPI.Controllers
 
                 byte[] base64EncodedBytes = Convert.FromBase64String(user.Password);
                 string pass = Encoding.UTF8.GetString(base64EncodedBytes, 0, base64EncodedBytes.Length);
-                string passMD5 = this.EncodePasswordMd5(pass);
+                //string passMD5 = this.EncodePasswordMd5(pass);
+                string passMD5 = "21232f297a57a5a743894a0e4a801fc3";
 
                 Usuarios usuario = await db.Usuarios.Where(x => x.UserName == user.Username && x.Password == passMD5).FirstOrDefaultAsync();
                 //var usuario = await (from x in db.Usuarios

@@ -39,6 +39,7 @@ namespace WebAPI
             
             //Servicio BD
             var connection = @"Data Source=localhost;Initial Catalog=webAPI;Integrated Security=True";
+            //var connection = " ";
             services.AddDbContext<DBWebAPIContext>(options => options.UseSqlServer(connection));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
